@@ -1,6 +1,7 @@
 .header {
   background-color: var(--background);
 }
+
 .menu {
   display: flex;
   align-items: center;
@@ -11,6 +12,7 @@
 
 .menu_part_left {
   display: flex;
+  align-items: center;
   flex-basis: 35%;
 }
 
@@ -27,6 +29,7 @@
 .link_position_last {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   flex-basis: 35%;
 }
 
