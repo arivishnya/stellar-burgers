@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import styles from './profile-menu.module.css';
 import { NavLink } from 'react-router-dom';
 import { ProfileMenuUIProps } from './type';
+
+import styles from './profile-menu.module.css';
 
 export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
   pathname,
@@ -19,6 +20,7 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
     >
       Профиль
     </NavLink>
+
     <NavLink
       to={'/profile/orders'}
       className={({ isActive }) =>
@@ -29,12 +31,14 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
     >
       История заказов
     </NavLink>
+
     <button
       className={`text text_type_main-medium text_color_inactive pt-4 pb-4 ${styles.button}`}
       onClick={handleLogout}
     >
       Выход
     </button>
+
     <p className='pt-20 text text_type_main-default text_color_inactive'>
       {pathname === '/profile'
         ? 'В этом разделе вы можете изменить свои персональные данные'

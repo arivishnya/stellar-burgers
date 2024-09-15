@@ -32,7 +32,12 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]__[local]__[hash:base64:5]',
+                auto: /\.module\.\w+$/i,
+                namedExport: false
+              }
             }
           }
         ]
@@ -52,6 +57,7 @@ module.exports = {
       extensions: ['.js', '.jsx', '.ts', '.tsx']
     }),
     new HtmlWebpackPlugin({
+      inject: false,
       template: './public/index.html'
     }),
     new Dotenv()
@@ -89,6 +95,7 @@ module.exports = {
     static: path.join(__dirname, './dist'),
     compress: true,
     historyApiFallback: true,
-    port: 4000
+    port: 4000,
+    open: true
   }
 };
