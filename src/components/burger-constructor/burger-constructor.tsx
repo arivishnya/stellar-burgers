@@ -25,11 +25,15 @@ export const BurgerConstructor: FC = () => {
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
-    if (!isAuthenticated) navigate('/login');
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
 
     const allIngredients = [constructorItems.bun].concat(
       constructorItems.ingredients
     );
+    allIngredients.push(constructorItems.bun);
     dispatch(addOrderBurger(allIngredients));
   };
 
