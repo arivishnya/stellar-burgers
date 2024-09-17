@@ -1,9 +1,13 @@
 .wrap {
-  margin: 0 auto;
+  margin: auto;
   width: 640px;
 }
+
 .number {
   text-align: center;
+  font-size: 28px;
+  line-height: 24px;
+  font-weight: 400;
 }
 
 .status {
@@ -71,6 +75,7 @@
   justify-content: flex-start;
   align-items: center;
 }
+
 .total {
   margin-left: auto;
 }
