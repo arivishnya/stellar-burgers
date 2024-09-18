@@ -1,11 +1,15 @@
 import { FC } from 'react';
 
-import { Button, Input } from '@zlden/react-developer-burger-ui-components';
-import styles from './profile.module.css';
-import commonStyles from '../common.module.css';
-
 import { ProfileUIProps } from './type';
+import { useSelector } from '../../../../services/store';
+import { userRequestSelector } from '../../../../services/slices/userSlice';
+
+import { Button, Input } from '@zlden/react-developer-burger-ui-components';
+import { Preloader } from '@ui';
 import { ProfileMenu } from '@components';
+
+import commonStyles from '../common.module.css';
+import styles from './profile.module.css';
 
 export const ProfileUI: FC<ProfileUIProps> = ({
   formValue,
@@ -14,16 +18,21 @@ export const ProfileUI: FC<ProfileUIProps> = ({
   handleSubmit,
   handleCancel,
   handleInputChange
-}) => (
-  <main className={`${commonStyles.container}`}>
-    <div className={`mt-30 mr-15 ${styles.menu}`}>
-      <ProfileMenu />
-    </div>
-    <form
-      className={`mt-30 ${styles.form} ${commonStyles.form}`}
-      onSubmit={handleSubmit}
-    >
-      <>
+}) => {
+  const isLoading = useSelector(userRequestSelector);
+
+  return isLoading ? (
+    <Preloader />
+  ) : (
+    <main className={`${commonStyles.container}`}>
+      <div className={`mt-30 mr-15 ${styles.menu}`}>
+        <ProfileMenu />
+      </div>
+
+      <form
+        className={`mt-30 ${styles.form} ${commonStyles.form}`}
+        onSubmit={handleSubmit}
+      >
         <div className='pb-6'>
           <Input
             type={'text'}
@@ -85,7 +94,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
             {updateUserError}
           </p>
         )}
-      </>
-    </form>
-  </main>
-);
+      </form>
+    </main>
+  );
+};

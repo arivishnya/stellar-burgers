@@ -1,9 +1,11 @@
 .header {
   background-color: var(--background);
 }
+
 .menu {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   max-width: 1240px;
   height: 56px;
   margin: 0 auto;
@@ -11,6 +13,7 @@
 
 .menu_part_left {
   display: flex;
+  align-items: center;
   flex-basis: 35%;
 }
 
@@ -27,6 +30,7 @@
 .link_position_last {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   flex-basis: 35%;
 }
 
