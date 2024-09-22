@@ -20,10 +20,7 @@ beforeEach(() => {
     'createOrder'
   );
 
-  window.localStorage.setItem(
-    'refreshToken',
-    JSON.stringify('refreshToken')
-  );
+  window.localStorage.setItem('refreshToken', JSON.stringify('refreshToken'));
   cy.setCookie('accessToken', 'accessToken');
 
   cy.visit('/');
@@ -38,9 +35,11 @@ afterEach(() => {
 });
 
 const constructor = (bun1: string, main: string, bun2: string) => {
-  cy.get(burgerConstructor).should('contain', bun1);
+  cy.get(burgerConstructor).find('[data-cy="top-bun"]').should('contain', bun1);
   cy.get(burgerConstructor).should('contain', main);
-  cy.get(burgerConstructor).should('contain', bun2);
+  cy.get(burgerConstructor)
+    .find('[data-cy="bottom-bun"]')
+    .should('contain', bun2);
 };
 
 it('Cчетчик', () => {
@@ -50,8 +49,15 @@ it('Cчетчик', () => {
 
 describe('Добавление ингредиентов', () => {
   it('bun1 + main', () => {
+    cy.get(burgerConstructor).should('not.contain', 'Краторная булка N-200i');
+    cy.get(burgerConstructor).should(
+      'not.contain',
+      'Биокотлета из марсианской Магнолии'
+    );
+
     cy.get(bun1).children('button').click();
     cy.get(main).children('button').click();
+
     constructor(
       'Краторная булка N-200i',
       'Биокотлета из марсианской Магнолии',
@@ -60,8 +66,15 @@ describe('Добавление ингредиентов', () => {
   });
 
   it('main + bun1', () => {
+    cy.get(burgerConstructor).should('not.contain', 'Краторная булка N-200i');
+    cy.get(burgerConstructor).should(
+      'not.contain',
+      'Биокотлета из марсианской Магнолии'
+    );
+
     cy.get(main).children('button').click();
     cy.get(bun1).children('button').click();
+
     constructor(
       'Краторная булка N-200i',
       'Биокотлета из марсианской Магнолии',
@@ -70,9 +83,17 @@ describe('Добавление ингредиентов', () => {
   });
 
   it('bun1 + main + sauce', () => {
+    cy.get(burgerConstructor).should('not.contain', 'Краторная булка N-200i');
+    cy.get(burgerConstructor).should(
+      'not.contain',
+      'Биокотлета из марсианской Магнолии'
+    );
+    cy.get(burgerConstructor).should('not.contain', 'Соус Spicy-X');
+
     cy.get(bun1).children('button').click();
     cy.get(main).children('button').click();
     cy.get(sauce).children('button').click();
+
     constructor(
       'Краторная булка N-200i',
       'Биокотлета из марсианской Магнолии',
@@ -105,15 +126,19 @@ describe('Замена булок', () => {
 
 describe('Модальные окна', () => {
   it('Открытие', () => {
+    cy.get(modal).should('not.exist');
     cy.get(bun1).click();
     cy.get(modal).should('be.visible');
+    cy.get(modal).should('contain', 'Краторная булка N-200i');
   });
+
   it('Закрытие по кнопке', () => {
     cy.get(main).click();
     cy.get(modal).should('be.visible');
     cy.get(modalClose).click();
     cy.get(modal).should('not.exist');
   });
+
   it('Закрытие по клику на оверлей', () => {
     cy.get(bun2).click();
     cy.get(modal).should('be.visible');
