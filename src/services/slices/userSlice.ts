@@ -7,7 +7,7 @@ import {
   logoutApi,
   updateUserApi,
   getUserApi
-} from '@api';
+} from '../../utils/burger-api';
 import { setCookie, deleteCookie } from '../../utils/cookie';
 import { TUser } from '../../utils/types';
 
@@ -50,7 +50,7 @@ export const getUser = createAsyncThunk('user/getUser', async () => {
   return data.user;
 });
 
-type TUserState = {
+export type TUserState = {
   user: TUser | undefined;
   isAuthChecked: boolean;
   isAuthenticated: boolean;
@@ -58,7 +58,7 @@ type TUserState = {
   userRequest: boolean;
 };
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   user: undefined,
   isAuthChecked: false,
   isAuthenticated: false,

@@ -9,7 +9,7 @@ import {
   getFeedsApi,
   getOrderByNumberApi,
   getOrdersApi
-} from '@api';
+} from '../../utils/burger-api';
 import {
   TConstructorIngredient,
   TIngredient,
@@ -47,7 +47,7 @@ const handleRejected = (state: TOrdersState, action: any) => {
   state.error = action.error.message;
 };
 
-type TOrdersState = {
+export type TOrdersState = {
   ordersData: TOrdersData | null;
   orderData: TOrder | null;
   userOrder: TOrder[] | null;
@@ -60,7 +60,7 @@ type TOrdersState = {
   error: string | null | undefined;
 };
 
-const initialState: TOrdersState = {
+export const initialState: TOrdersState = {
   ordersData: null,
   orderData: null,
   userOrder: null,
